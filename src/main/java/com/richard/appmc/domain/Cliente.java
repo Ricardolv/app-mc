@@ -35,7 +35,6 @@ public class Cliente implements Serializable {
     @Getter @Setter
     private String cpfOuCnpj;
 
-    @Getter @Setter
     private Integer tipo;
 
     @Getter @Setter
@@ -70,9 +69,17 @@ public class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = (tipo==null) ? null : tipo.getCod();
+        this.tipo = (null == tipo) ? null : tipo.getCod();
         this.senha = senha;
         addPerfil(Perfil.CLIENTE);
+    }
+
+    public TipoCliente getTipo() {
+        return TipoCliente.toEnum(tipo);
+    }
+
+    public void setTipo(TipoCliente tipo) {
+        this.tipo = tipo.getCod();
     }
 
     public Set<Perfil> getPerfis() {
